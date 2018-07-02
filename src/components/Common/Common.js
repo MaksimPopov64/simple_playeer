@@ -13,7 +13,15 @@ export default class Common extends Component {
         const apikey = 'AIzaSyAw3zkUJ1FuAFxMup3THuzep_dWFhkmluw';
         let search = event.target.value;
         const url = `https://www.googleapis.com/youtube/v3/search?part=id,snippet&maxResults=10&key=${apikey}&q=${search}&alt=json`;
-        axios.get(url)
+        axios.get(url, {
+            method: 'GET',
+                mode: 'no-cors',
+                headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+                credentials: 'same-origin',})
             .then(res => {
                 this.setState({
                     videos: res.data.items,
