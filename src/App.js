@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
+import Common from './components/Common/Common';
+import Video from './components/controls/Video/Video';
 
 
 const App = () => {
@@ -8,9 +9,9 @@ const App = () => {
         <Router>
             <div>
                 <Switch>
-                    <Route exact path="/" component={Main}/>
+                    <Route path='/video' component={Video}/>
+                    <Route exact path="/" component={Common}/>
                     <Route exact path="/main" component={Common}/>
-                    <Route exact path="/auth" component={Video}/>
                 </Switch>
             </div>
         </Router>

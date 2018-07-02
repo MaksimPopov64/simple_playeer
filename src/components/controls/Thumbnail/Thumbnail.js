@@ -1,24 +1,46 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+import React, { Component } from 'react';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import { Link } from 'react-router-dom';
+
+import ListItemText from '@material-ui/core/ListItemText';
 
 
+export default class Thumbnail extends Component {
+    getVideosId = (videos) => {
+        return videos.map((item, id) => {
+            let obj = {id: id, videoId: item.id.videoId};
+            return obj;
+        });
+    };
 
-class Thumbnail extends Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
+        const {items} = this.props;
+        const ids = this.getVideosId(items);
+        console.log(items);
         return (
             <div>
-                <List style={{ width: 400 }}>
-                    <ListItem
-                        innerDivStyle={{ paddingLeft: 80 }}
-                        leftAvatar={
-                            <img style={{ height: '100%', margin: -16 }} src="https://zartnerds.files.wordpress.com/2015/10/thumbnail.png" />
-                        }
-                        primaryText="Some Title"
-                        secondaryText="That's a good looking thumbnail"
-                    />
-                </List>
+                {items.length > 0 &&
+                <List style={{width: 800}}>
+                    {items.map(item =>
+                        <Link to={{
+                            pathname: `/video/${item.id.videoId}`,
+                            state: {
+                                id: item.id.videoId,
+                                ids: ids,
+                                cardDesc: 'Description'
+                            }
+                        }} style={{textDecoration: 'none'}}>
+                            <ListItem value={item}>
+                                <img src={item.snippet.thumbnails.default.url}/>
+                                <ListItemText primary={item.snippet.title} secondary={item.snippet.description}/>
+                            </ListItem>
+                        </Link>)}
+                </List>}
             </div>
         );
     }

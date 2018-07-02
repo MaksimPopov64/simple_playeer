@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Common from './components/Common/Common';
+import App from './App';
 
 const title = 'Minimal configuration';
 
 ReactDOM.render(
-<div><Common /></div>,
+<div><App /></div>,
 document.getElementById('app')
 );
 module.hot.accept();

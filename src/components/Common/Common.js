@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import MockAdapter from 'axios-mock-adapter';
 import Search from '../controls/Search/Search';
+import Thumbnail from '../controls/Thumbnail/Thumbnail';
 
 
 export default class Common extends Component{
@@ -10,7 +11,7 @@ export default class Common extends Component{
  constructor(props){
      super(props);
      this.state ={
-         videos:''
+         videos:[]
      }
  }
 
@@ -18,7 +19,7 @@ export default class Common extends Component{
      console.log(event.target.value);
      const apikey ='AIzaSyAw3zkUJ1FuAFxMup3THuzep_dWFhkmluw';
      let  search =  event.target.value;
-     const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&key=${apikey}&q=${search}&alt=json`;
+     const url = `https://www.googleapis.com/youtube/v3/search?part=id,snippet&maxResults=10&key=${apikey}&q=${search}&alt=json`;
      axios.get(url)
          .then(res => {
              this.setState({
@@ -31,11 +32,10 @@ export default class Common extends Component{
 
  }
 
- render() {
-     return <div>
-
+ render() {    return <div>
          <Search handleChange = {this.handleInput}/>
-     </div>
+         <Thumbnail items = {this.state.videos}/>
+ </div>
  }
 
 
