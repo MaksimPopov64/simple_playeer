@@ -27,11 +27,12 @@ export default class Thumbnail extends Component {
             <div>
                 {items.length > 0 &&
                 <List style={{paddingTop: 0}}>
-                    {items.map(item =>
+                    {items.map((item,id) =>
                         <Link to={{
-                            pathname: `/video/${item.id.videoId}`,
+                            pathname: `/video`,
                             state: {
-                                id: item.id.videoId,
+                                videoId: item.id.videoId,
+                                id: id,
                                 ids: ids,
                                 cardDesc: 'Description'
                             }
